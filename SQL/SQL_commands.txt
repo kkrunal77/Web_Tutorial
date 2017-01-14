@@ -1,0 +1,249 @@
+---------------------------------------------------
+DDL_1
+
+CREATE database temp_db;
+INSERT INTO `items` (`id`, `name`, `price`) VALUES (NULL, 'Canon EOS', '36000');
+CREATE TABLE temp_db.products ( id INT(11), name VARCHAR(30) , category INT(30) );
+CREATE TABLE products ( id INT(11), name VARCHAR(30) , category INT(30) );
+CREATE TABLE temp_db.products_1 ( id INT(11) NOT NULL, name VARCHAR(30) , category INT(30) );
+---------------------------------------------------
+DDL_2
+
+CREATE TABLE temp_db.products_2 ( id INT NOT NULL, name VARCHAR(30), category INT(30), PRIMARY KEY (id));
+CREATE TABLE temp_db.products_3 ( id INT NOT NULL PRIMARY KEY, name VARCHAR(30), category INT(30));
+CREATE TABLE temp_db.products_4 ( id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(30), category INT(30));
+---------------------------------------------------
+Alter & Drop_1
+
+Alter table database_name.table_name CHANGE column_name new_column_name data type(length) constraints;
+Alter table temp_db.temp_users CHANGE first_name name varchar(255);
+Alter table database_name.table_name MODIFY column_name datatype properties;
+Alter table temp_db.temp_users MODIFY last_name varchar(255) NOT NULL;
+Alter table temp_db.temp_users MODIFY name char(255) NOT NULL;
+
+//USED
+ALTER TABLE temp_db.temp_users ADD id INT(11) PRIMARY_KEY AUTO_INCREMENT;
+ALTER TABLE temp_db.temp_users DROP lastname;
+Alter table temp_db.temp_users CHANGE firstname name varchar(255)
+ALTER TABLE temp_db.temp_users MODIFY COLUMN id INT AUTO_INCREMENT;
+ALTER TABLE temp_db.temp_users MODIFY name varchar(255) NOT NULL
+----------------------------------------------------
+Alter & Drop_2
+
+ALTER TABLE temp_db.products MODIFY id INT NOT NULL;
+ALTER TABLE temp_db.temp_users ADD id INT(11) PRIMARY_KEY AUTO_INCREMENT;
+ALTER TABLE temp_db.products ADD PRIMARY KEY(id);
+ALTER TABLE temp_db.products MODIFY COLUMN id INT AUTO_INCREMENT;
+----------------------------------------------------
+
+ALTER TABLE `users_products` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT; ALTER TABLE `users_products` ADD FOREIGN KEY (`product_id`) REFERENCES `products`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+Alter & Drop_3
+
+DROP table temp_db.products_1;
+DROP table temp_db.products_2;
+DROP table temp_db.products_3;
+DROP table temp_db.products_4;
+DROP database temp_db;
+-----------------------------------------------------
+Alter & Drop_exp
+
+Which of the following keyword is not used with ALTER?
+
+  ADD
+  DROP
+  REJECT(ans)
+  MODIFY
+
+ALTER command cannot be used to:
+
+  change the structure of table.
+  change the data of the table(ans)
+  change name of a column
+  change the data type of a column
+-------------------------------------------------------
+Foreign Key & Truncate_1
+
+CREATE table products query;
+CREATE table users_products query;
+-------------------------------------------------------
+Foreign Key & Truncate_2
+
+TRUNCATE TABLE users_products;
+TRUNCATE TABLE users;
+-------------------------------------------------------
+Foreign Key & Truncate_exp
+
+Suppose there are 5 records in a table and truncate command is used. Then we insert a new record. What will be the value of the primary key?
+
+  1(ans).
+  6
+-------------------------------------------------------
+Data Manipulation Language(DML)_1
+
+INSERT INTO ecommerce.products (name, category) values ('harry_potter', 'book');
+INSERT INTO ecommerce.products (name, category) values ('deception_point', 'book');
+INSERT INTO ecommerce.products (name, category) values ('drunkards_walk', 'book');
+INSERT INTO ecommerce.products (name, category) values ('pencil_box', 'stationery');
+INSERT INTO ecommerce.products (name, category) values ('night_lamp', 'other');
+
+INSERT INTO ecommerce.users (email, first_name, last_name, phone) values ('max@xyz.com', 'Max', 'Joseph', 9915174990);
+INSERT INTO ecommerce.users (email, first_name, last_name, phone) values ('atif@xyz.com', 'Atif', NULL, 9915174991);
+INSERT INTO ecommerce.users (email, first_name, last_name, phone) values ('amar@xyz.com', 'Amar', NULL, 9915174956);
+INSERT INTO ecommerce.users (email, first_name, last_name, phone) values ('rahul@xyz.com', 'Rahul', NULL, 5515874956);
+INSERT INTO ecommerce.users_products (user_id, product_id) values (4, 2);
+INSERT INTO ecommerce.users_products (user_id, product_id) values (4, 5);
+----------------------------------------------------------
+Data Manipulation Language(DML)_2
+
+UPDATE users SET first_name = 'Arjun' WHERE users.id = 3;
+UPDATE users SET first_name = 'Arjun' WHERE users.id = 3;
+UPDATE users SET first_name = 'Arjun' WHERE users.id = 3;
+UPDATE users SET first_name = 'Arjun';
+UPDATE users SET first_name = 'Arjun' WHERE users.id = 3;
+UPDATE users SET first_name = 'Vinayak' WHERE users.email = 'rahul@xyz.com';
+UPDATE users SET last_name = 'unknown' WHERE last_name IS NULL;
+UPDATE users SET first_name = 'Vinayak' WHERE users.id = 1 OR users.id = 2;
+DELETE FROM users WHERE id = 1;
+-----------------------------------------------------------
+Data Manipulation Language(DML)_3
+
+The queries used in the lesson.
+
+SELECT * FROM products;
+SELECT id, name FROM products;
+SELECT id, name, category FROM products where id = 1;
+SELECT id, name, category FROM products where category = 'book';
+SELECT id, first_name, last_name FROM users;
+SELECT id, first_name, last_name FROM users WHERE last_name = ‘unknown’;
+SELECT id, first_name, last_name, phone FROM users WHERE last_name = 'unknown' AND phone = 991517499;
+
+DISTINCT
+Run the following query:
+
+SELECT user_id FROM users_products;
+The above query returns all the users who have purchased products including many repeated users who have purchased more than one product.
+To get only the distinct users we use DISTINCT keyword as:
+
+SELECT DISTINCT user_id FROM users_products;
+
+ORDER BY
+ORDER BY is used to get the results in a sorted manner. Run the following query:
+
+SELECT id, name FROM products ORDER BY name ASC;
+ORDER BY is followed by the column name depending on which the records will be sorted. ASC is the keyword used to sort the records in the ascending order. DESC is the keyword used to sort the records in the descending order.
+Next live chat: Mon (4:00 - 6:00 PM)
+---------------------------------------------------------------------
+Exercise:
+We assume that there are no data in all the three tables. So the primary id of the following tables start from 1.
+ALTER command (you are free to use either GUI or SQL command):
+Add a new column in users table with following properties: registration_timestamp (type: timestamp, default: current_timestamp)
+Add a new column in products table with following properties: purchase_timestamp (type: timestamp, default: current_timestamp)
+
+NOTE:
+When we assign a default value to a column, then that default value is stored if none other value is forced to be stored using INSERT/UPDATE. When default of a timestamp column is CURRENT_TIMESTAMP, it enters the date & time of that very instance when the record/row was being created. Thus, registration_timestamp in users table will now store the date & time whenever a particular user registers. Similarly, in users_products table we will now store exactly when was it when a user purchased a particular product.
+
+Now, we will insert records of all the users who registered, all the products that we sell, and order history of every user who has made at least one purchase in the past. INSERT the following records in users table, products table, and users_products table: 
+
+users table: 
+data below is in the following sequence:
+email, first_name, last_name, phone, registration_timestamp
+Data:'unknown' ('venu@xyz.com', 'Venu', 'Sharma', 547903927, '2016-09-28 21:30:04'),
+('shubham@xyz.com', 'Shubha', NULL, 538915694, CURRENT_TIMESTAMP),
+('disha@xyz.com', 'Disha', 'Kaur', 557825323, '2016-09-30 00:02:14'),
+('ankit@xyz.com', 'Ankit', 'Kumar', 561322116, '2016-09-30 15:05:18'),
+('mrinal@xyz.com', 'Mrinal', 'Joy', 517918670, ‘2016-10-02 09:08:06’),
+('abhilash@xyz.com', 'Abhilash', 'Jalsani', 509841902, ’2016-10-01 10:30:00’),
+('hardik@xyz.com', 'Hardik', 'Arora', 595452568, '2016-09-30 13:20:45'),
+('yesha@xyz.com', 'Yesha', 'Krishna', 534532216, '2016-09-30 13:20:45'),
+('rushit@xyz.com', 'Rushit', NULL, 534359370, '2016-09-29 11:46:37'),
+('jessy@xyz.com', 'Jessy', 'Joseph', 591053100, '2016-09-29 00:02:14'),
+('jasper@xyz.com', 'Jaspreet', NULL, 515078235, '2016-09-29 23:50:12'),
+('prachi@xyz.com', 'Prachi', NULL, 530670640, '2016-09-29 12:12:12');
+
+NOTE:
+Registration timestamps are shared for each user. Please notice yourself that for Shubham (2nd user on the list above), the argument CURRENT_TIMESTAMP will store the time of running the INSERT query. We recommend you to cross-check this fact by yourself.
+Few entries are NULL, that is. The data for these entries was not provided.
+You do not have to take care of the id column explicitly, provided it is already defined as primary key and with auto-increment.
+
+
+products table: 
+data below is in the following sequence:
+(name, category)
+Data: ('harry_potter', 'book'),
+('deception_point', 'book'),
+('drunkards_walk', 'book'),
+('the_kite_runner', 'book'),
+('animal_farm', 'book'),
+('night_lamp', 'other'),
+('pencil_box', 'stationery'),
+('fountain_pen', 'stationery'),
+('study_bed_table', 'other'),
+('personal_diary', 'stationery');
+
+NOTE:
+You do not have to take care of the id column explicitly, provided it is already defined as primary key and with auto-increment.
+
+users_products table: 
+data below is in the following sequence:
+(user_id, product_id, purchase_timestamp)
+Data:
+(12, 3, '2016-10-10 18:10:12'),
+(12, 6, '2016-10-12 18:10:12'),
+(8, 6, '2016-10-29 12:12:12'),
+(4, 6, '2016-10-15 13:05:04'),
+(10, 9, '2016-10-10 02:15:16'),
+(7, 4, '2016-10-10 08:34:42'),
+(5, 1, '2016-10-19 16:58:54'),
+(4, 5, '2016-10-14 11:35:32'),
+(8, 5, '2016-10-23 56:45:23'),
+(7, 7, '2016-10-04 13:12:35'),
+(12, 2, '2016-10-14 12:23:41'),
+(12, 7, '2016-10-21 14:15:13'),
+(7, 2, '2016-10-05 16:08:02'),
+(7, 8, '2016-10-06 17:34:49'),
+(1, 2, '2016-10-13 15:37:51'),
+(11, 6, '2016-10-15 10:03:01');
+
+Now we have the order history of every user who has made at least one purchase. 
+
+NOTE:
+Purchase timestamp are shared for each user.
+You do not have to take care of the id column explicitly, provided it is already defined as primary key and with auto-increment.
+
+Now, you received a mail from one of your users that all the emails that he receives from us are addressed to a wrong name. His name is Shubham, but the mails are addressed to Shubha. So you figured out that probably he made a typo while typing his name during registering on your website (all the emails are addressed to the first_name column). Your task is to update users name to Shubham using UPDATE command.
+
+Now, you received another mail from another email from yesha@xyz.com who says that she bought a book, and just wanted to confirm whether the order was successfully placed or not. Your task is to find out whether a user with email id yesha@xyz.com has ordered anything. If yes, what.
+
+Next, you figured out she did purchase a book. While checking for her orders, you also figured out that there’s a typo in the name of the book she has ordered (just by looking at the entry). Your task is to UPDATE the book’s name to its correct name. (Search in Google if you don’t know the correct spelling of that book).
+
+----------------------------------------------------------------
+Consider the following query:
+SELECT id, name FROM products ORDER BY name;
+
+Here we have not used ASC/DESC with ORDER BY. Is the result sorted now?
+
+  Yes, the result will be sorted in ascending order.==ans
+  Yes, the result will be sorted in descending order.
+  No, the result will not be sorted.
+  The query will throw an error.
+Well Done!
+
+Explanation: By default, sorting is done in the ascending order.
+
+
+Do you think we can limit how many records we can fetch from the database in a SELECT query?
+
+  Yes
+  No
+Well Done!
+
+Explanation: Yes, we use LIMIT keyword for the same as : SELECT id, first_name, last_name FROM users LIMIT 5;
+
+
+
+
+
+
+
+
+
